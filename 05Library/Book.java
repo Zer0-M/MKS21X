@@ -10,6 +10,7 @@ public class abstract Book{
 	ISBN=isbn
     }
     public String toString(){
+	return title+", "+author+", "+ISBN
     }
     public String getAuthor(){
 	return author;
