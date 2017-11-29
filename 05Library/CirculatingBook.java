@@ -2,7 +2,7 @@ public class CirculatingBook extends LibraryBook{
   private String currentHolder;
   private String dueDate;
   public CirculatingBook(String au,String name,String isbn, String call){
-    super(au,name,isbn, call)
+    super(au,name,isbn, call);
   }
   public String getCurrentHolder(){
     return currentHolder;
