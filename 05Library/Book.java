@@ -6,11 +6,11 @@ public class Book{
     }
     public Book(String writer,String name,String isbn){
 	author=writer;
-	title=name
-	ISBN=isbn
+	title=name;
+	ISBN=isbn;
     }
     public String toString(){
-	return title+", "+author+", "+ISBN
+      return title+", "+author+", "+ISBN;
     }
     public String getAuthor(){
 	return author;
