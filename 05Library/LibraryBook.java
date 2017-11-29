@@ -1,8 +1,11 @@
 public abstract class LibraryBook extends Book implements Comparable<LibraryBook>{
-  String private callNumber;
+  private String callNumber;
   public LibraryBook(String au,String name,String isbn, String call){
     super(au,name,isbn);
     callNumber=call;
+  }
+  public String toString(){
+    return super.toString()+getCallNumber()+circulationStatus;
   }
   public String getCallNumber(){
     return callNumber;
@@ -11,4 +14,11 @@ public abstract class LibraryBook extends Book implements Comparable<LibraryBook
     callNumber=call;
     return callNumber==call;
   }
+  public abstract void checkout(String patron,String due);
+  public abstract void returned();
+  public abstract String circulationStatus();
+  public int compareTo(LibraryBook other){
+    return toString().compareTo(other.toString());
+  }
+
 }
