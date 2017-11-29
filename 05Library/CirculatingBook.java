@@ -19,8 +19,10 @@ public class CirculatingBook extends LibraryBook{
     return dueDate==due;
   }
   public void checkout(String patron,String due){
+    if(currentHolder==null){
     currentHolder=patron;
     dueDate=due;
+    }
   }
   public void returned(){
     currentHolder=null;
