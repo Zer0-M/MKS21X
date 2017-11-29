@@ -23,8 +23,8 @@ public class CirculatingBook extends LibraryBook{
     dueDate=due;
   }
   public void returned(){
-    currentHolder=new String();
-    dueDate=new String();
+    currentHolder=null;
+    dueDate=null;
   }
   public String circulationStatus(){
     if(currentHolder!=null){
