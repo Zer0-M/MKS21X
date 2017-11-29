@@ -18,5 +18,18 @@ public class CirculatingBook extends LibraryBook{
     dueDate=due;
     return dueDate==due;
   }
-
+  public void checkout(String patron,String due){
+    currentHolder=patron;
+    dueDate=due;
+  }
+  public void returned(){
+    currentHolder=new String();
+    dueDate=new String();
+  }
+  public String circulationStatus(){
+    if(currentHolder!=null){
+      return currentHolder+" "+dueDate;
+    }
+    return "book available on shelves";
+  }
 }
