@@ -1,7 +1,10 @@
-public class Barcode {
+public class Barcode implements Comparable<Barcode>{
   private String zip;
   public Barcode(String z){
     zip=z;
+  }
+  public String toString(){
+    return getCode() +"("+ getZip()+")";
   }
   public String  getCode(){
     String[] codes={
@@ -17,8 +20,14 @@ public class Barcode {
   public String getZip(){
     return zip;
   }
-  public static void main(String[] args){
-    Barcode B=new Barcode("11103");
-    System.out.println(B.getZip());
+  public int compareTo(Barcode other){
+    return getZip().compareTo(other.getZip());
   }
+  public boolean equals(Barcode other){
+    if(compareTo(other)==0){
+      return true;
+    }
+    return false;
+  }
+
 }
