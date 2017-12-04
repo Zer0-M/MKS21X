@@ -7,5 +7,15 @@ public class superArrayIterator implements Iterator<String>{
     data=dat;
     size=data.size();
   }
+  public String next(){
+    if(hasNext()){
+      current+=1;
+    }
+    else{System.exit(0);}
+    return data.get(current-1);
+  }
+  public boolean hasNext(){
+    return current<=size-1;
+  }
 
 }
