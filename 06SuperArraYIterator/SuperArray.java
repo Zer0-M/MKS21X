@@ -249,7 +249,6 @@ public class SuperArray implements Iterable<String>{
     suparr.add(data[i]);
     i++;
     }
-    System.out.println(suparr.size());
     return new superArrayIterator(suparr);
   }
 
