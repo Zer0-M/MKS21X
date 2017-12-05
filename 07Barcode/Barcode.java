@@ -1,7 +1,7 @@
 import java.util.*;
 public class Barcode implements Comparable<Barcode>{
   private String zip;
-  private int checkSum;
+  private static int check;
   public Barcode(String z){
     try{
       Integer.parseInt(z);
@@ -9,13 +9,11 @@ public class Barcode implements Comparable<Barcode>{
       throw new IllegalArgumentException();
     }
     if(z.length()==5){
-    zip=z;
+      zip=z;
     }
     else{
       throw new IllegalArgumentException();
     }
-    generateCheckSum();
-
   }
   public String toString(){
     return getCode() +"("+ getZip()+")";
@@ -24,21 +22,43 @@ public class Barcode implements Comparable<Barcode>{
     String[] codes={
       "||:::",":::||","::|:|","::||:",":|::|",":|:|:",":||::","|:::|","|::|:","|:|::"
     };
+    int check=generateCheckSum(z);
+    z+=check;
     try{
       Integer.parseInt(z);
     }catch(NumberFormatException e){
       throw new IllegalArgumentException();
     }
-    if(z.length()!=5){
+    if(z.length()!=6){
       throw new IllegalArgumentException();
     }
     String barcode="|";
-    String zipWithCheck=z+checkSum;
+    String zipWithCheck=z+check;
     for(int i=0;i<zipWithCheck.length();i++){
       int digit=Integer.parseInt(zipWithCheck.substring(i,i+1));
       barcode+=codes[digit];
     }
     return barcode+"|";
+  }
+  public static String toZip(String code){
+    String[] codes={
+      "||:::",":::||","::|:|","::||:",":|::|",":|:|:",":||::","|:::|","|::|:","|:|::"
+    };
+    String checkSum="";
+    String zipWithCheck="";
+    for(int i=1;i<code.length()-6;i+=5){
+      String codeDigit=code.substring(i,i+5);
+      for(int ind=0;ind<codes.length;ind++){
+        if(codeDigit.equals(codes[ind])&&i!=code.length()-11){
+          zipWithCheck+=ind;
+        }
+        else{
+          checkSum+=ind;
+        }
+      }
+
+    }
+    return zipWithCheck;
   }
   public String  getCode(){
     return toCode(zip);
@@ -55,17 +75,17 @@ public class Barcode implements Comparable<Barcode>{
     }
     return false;
   }
-  private void generateCheckSum(){
+  private static int generateCheckSum(String z){
     int sum=0;
-    for(int i=0;i<getZip().length();i++){
-      int digit=Integer.parseInt(getZip().substring(i,i+1));
+    for(int i=0;i<z.length();i++){
+      int digit=Integer.parseInt(z.substring(i,i+1));
       sum+=digit;
     }
-    checkSum=sum%10;
+    return sum%10;
   }
   public static void main(String[] args){
-    Barcode B=new Barcode("13136");
+    System.out.println(toCode("11103"));
+    System.out.println(toZip(toCode("11103")));
   }
-
 
 }
