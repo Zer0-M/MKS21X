@@ -3,7 +3,17 @@ public class Barcode implements Comparable<Barcode>{
   private String zip;
   private int checkSum;
   public Barcode(String z){
+    try{
+      Integer.parseInt(z);
+    }catch(NumberFormatException e){
+      throw new IllegalArgumentException();
+    }
+    if(z.length()==5){
     zip=z;
+    }
+    else{
+      throw new IllegalArgumentException();
+    }
     generateCheckSum();
 
   }
@@ -45,5 +55,6 @@ public class Barcode implements Comparable<Barcode>{
     }
     checkSum=sum%10;
   }
+
 
 }
