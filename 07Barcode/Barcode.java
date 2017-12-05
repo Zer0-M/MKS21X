@@ -20,12 +20,20 @@ public class Barcode implements Comparable<Barcode>{
   public String toString(){
     return getCode() +"("+ getZip()+")";
   }
-  private String convertZiptoCode(){
+  public static String toCode(String z){
     String[] codes={
       "||:::",":::||","::|:|","::||:",":|::|",":|:|:",":||::","|:::|","|::|:","|:|::"
     };
+    try{
+      Integer.parseInt(z);
+    }catch(NumberFormatException e){
+      throw new IllegalArgumentException();
+    }
+    if(z.length()!=5){
+      throw new IllegalArgumentException();
+    }
     String barcode="|";
-    String zipWithCheck=getZip()+checkSum;
+    String zipWithCheck=z+checkSum;
     for(int i=0;i<zipWithCheck.length();i++){
       int digit=Integer.parseInt(zipWithCheck.substring(i,i+1));
       barcode+=codes[digit];
@@ -33,7 +41,7 @@ public class Barcode implements Comparable<Barcode>{
     return barcode+"|";
   }
   public String  getCode(){
-    return convertZiptoCode();
+    return toCode(zip);
   }
   public String getZip(){
     return zip;
@@ -54,6 +62,9 @@ public class Barcode implements Comparable<Barcode>{
       sum+=digit;
     }
     checkSum=sum%10;
+  }
+  public static void main(String[] args){
+    Barcode B=new Barcode("13136");
   }
 
 
