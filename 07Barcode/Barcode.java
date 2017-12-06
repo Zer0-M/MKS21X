@@ -22,6 +22,11 @@ public class Barcode implements Comparable<Barcode>{
     String[] codes={
       "||:::",":::||","::|:|","::||:",":|::|",":|:|:",":||::","|:::|","|::|:","|:|::"
     };
+     try{
+      Integer.parseInt(z);
+    }catch(NumberFormatException e){
+      throw new IllegalArgumentException();
+    }
     int check=generateCheckSum(z);
     z+=check;
     try{
@@ -44,21 +49,36 @@ public class Barcode implements Comparable<Barcode>{
     String[] codes={
       "||:::",":::||","::|:|","::||:",":|::|",":|:|:",":||::","|:::|","|::|:","|:|::"
     };
-    String checkSum="";
-    String zipWithCheck="";
+    int  checkSum=0;
+    String zipCode="";
+    String codeWithoutCheck=code.substring(0,31)+"|";
+    if(!code.substring(0,1).equals("|")||!code.substring(code.length()-1,code.length()).equals("|")||codeWithoutCheck.length()!=32){
+      throw new IllegalArgumentException();
+    }
     for(int i=1;i<code.length()-6;i+=5){
+      boolean found=false;
       String codeDigit=code.substring(i,i+5);
       for(int ind=0;ind<codes.length;ind++){
-        if(codeDigit.equals(codes[ind])&&i!=code.length()-11){
-          zipWithCheck+=ind;
+
+        if(codeDigit.equals(codes[ind])){
+          if(i==code.length()-11){
+            checkSum+=ind;
+          }
+          else{
+          zipCode+=ind;
+          }
+          found=true;
         }
-        else{
-          checkSum+=ind;
+        else if(ind==codes.length-1&&!found){
+          throw new IllegalArgumentException();
         }
       }
 
     }
-    return zipWithCheck;
+    if(generateCheckSum(zipCode)!=checkSum){
+      throw new IllegalArgumentException();
+    }
+    return zipCode;
   }
   public String  getCode(){
     return toCode(zip);
@@ -83,9 +103,4 @@ public class Barcode implements Comparable<Barcode>{
     }
     return sum%10;
   }
-  public static void main(String[] args){
-    System.out.println(toCode("11103"));
-    System.out.println(toZip(toCode("11103")));
-  }
-
 }
