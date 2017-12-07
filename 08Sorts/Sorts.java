@@ -48,15 +48,4 @@ public class Sorts{
       }
     }
   }
-  public static void main(String[] arg){
-    int[] ary=new int[100];
-    for(int i=0;i<ary.length;i++){
-      ary[i]=(int)(Math.random()*100);
-    }
-    System.out.println(Arrays.toString(ary));
-    selectionSort(ary);
-    //insertionSort(ary);
-    System.out.println(Arrays.toString(ary));
-  }
-
 }
