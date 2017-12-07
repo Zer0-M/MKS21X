@@ -6,14 +6,19 @@ public class Sorts{
     return "10.Jamil.Mohammed";
   }
   /**isSorted method created by Mr. K
+     improved based on Mr.K's advice on using built-in method
    */
   public static boolean isSorted(int[]ary){
-    for(int i = 0; i < ary.length - 1 ; i++){
-      if(ary[i] > ary[i+1]){
-        return false;
-      }
-    }
-    return true;
+      //for(int i = 0; i < ary.length - 1 ; i++){
+      //if(ary[i] > ary[i+1]){
+      //  return false;
+      // }
+      //}
+      //return true;
+      int[] arr=ary;
+      Arrays.sort(arr);
+      return Arrays.equals(ary,arr);
+      
   }
 
   /**Selection sort of an int array.
@@ -22,8 +27,7 @@ public class Sorts{
    */
   public static void selectionSort(int[] data){
     int indexOfSmallest=0;
-    int ind=0;
-    while(!isSorted(data)){
+    for(int ind=0;!isSorted(data);ind++){
       int smallest=data[ind];
       for(int i=ind;i<data.length;i++){
         if(data[i]<smallest){
@@ -34,7 +38,6 @@ public class Sorts{
       int temp=data[ind];
       data[ind]=smallest;
       data[indexOfSmallest]=temp;
-      ind++;
     }
   }
   public static void insertionSort(int[] data){
@@ -46,6 +49,7 @@ public class Sorts{
           data[i-1]=temp;
         }
       }
-    }
+    }  
   }
+
 }
