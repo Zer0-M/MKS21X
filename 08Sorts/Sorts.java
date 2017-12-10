@@ -20,6 +20,13 @@ public class Sorts{
       return Arrays.equals(ary,arr);
       
   }
+  /**swap method made by Mr. K
+   */
+  private static void swap(int[]ary,int a, int b){
+        int c =ary[a];
+        ary[a] = ary[b];
+        ary[b] = c;
+  }
 
   /**Selection sort of an int array.
    *Upon completion, the elements of the array will be in increasing order.
@@ -35,21 +42,25 @@ public class Sorts{
           indexOfSmallest=i;
         }
       }
-      int temp=data[ind];
-      data[ind]=smallest;
-      data[indexOfSmallest]=temp;
+      swap(data,ind,indexOfSmallest);
     }
   }
   public static void insertionSort(int[] data){
     while(!isSorted(data)){
       for(int i=0;i<data.length;i++){
-        int temp=data[i];
         if(i!=0&&data[i-1]>data[i]){
-          data[i]=data[i-1];
-          data[i-1]=temp;
+          swap(data,i,i-1);
         }
       }
+      System.out.print(Arrays.toString(data));
     }  
+  }
+  public static void bubbleSort(int[] data){
+    while(!isSorted(data)){
+      for(int i=1;(data[i]>data[i-1]);i++){
+        swap(data,i-1,i);
+      }
+    }
   }
 
 }
