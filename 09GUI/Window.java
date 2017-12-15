@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-public class Window2 extends JFrame implements ActionListener {
+public class Window extends JFrame implements ActionListener {
     private Container pane;
     private JCheckBox CtoF;
     private JCheckBox FtoC;
@@ -13,10 +13,6 @@ public class Window2 extends JFrame implements ActionListener {
   public void actionPerformed(ActionEvent e) { 
       String s =e.getActionCommand();
       System.out.println(s);
-      //if(CtoF.isSelected()){
-      //	  s+=Temperature.CtoF(Integer.parseInt(t.getText()));
-      //}
-
       
   } 
   public Window() {
@@ -33,6 +29,8 @@ public class Window2 extends JFrame implements ActionListener {
      convert= new JButton("Convert");
      t = new JTextField(12);
      convert.addActionListener(this);
+     FtoC.addActionListener(this);
+     CtoF.addActionListener(this);
      pane.add(FtoC);
      pane.add(CtoF);
      pane.add(t);
