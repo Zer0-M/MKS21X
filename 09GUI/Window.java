@@ -15,11 +15,15 @@ public class Window extends JFrame implements ActionListener {
   public void actionPerformed(ActionEvent e) { 
       String s =e.getActionCommand();
       if(s.equals("Convert")){
+        try{
         if(CtoF.isSelected()){
           result.setText(Temperature.CtoF(Double.parseDouble(input.getText()))+"");
         }
         else if(FtoC.isSelected()){
           result.setText(Temperature.FtoC(Double.parseDouble(input.getText()))+"");
+        }
+        }catch(NumberFormatException E){
+          input.setText("input a number");
         }
       }    
   } 
