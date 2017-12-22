@@ -40,13 +40,16 @@ public class Sorts{
     }
   }
   public static void insertionSort(int[] data){
-    while(!isSorted(data)){
-      for(int i=0;i<data.length;i++){
-        if(i!=0&&data[i-1]>data[i]){
-          swap(data,i,i-1);
+      for(int i=1;i<data.length;i++){
+        int startVal=data[i];
+        int tempint=i-1;
+        while(tempint>=0&&data[tempint]>startVal){
+          data[tempint+1]=data[tempint];
+          tempint--;  
         }
+        data[tempint+1]=startVal;
+        
       }
-    }  
   }
   public static void bubbleSort(int[] data){
     for(int ind=0;ind<data.length;ind++){
