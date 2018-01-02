@@ -187,13 +187,17 @@ public class SuperArray{
   public void add(int index,String element){
       if (size()==data.length){
         resize();
-
       }
-      for(int i=size()-1;i>=index;i--){
-          data[i+1]=data[i];
+      if(index<=size()&&index>=0){
+	  for(int i=size()-1;i>=index;i--){
+	      data[i+1]=data[i];
+	  }
+	  data[index]=element;
+	  size+=1;
       }
-      data[index]=element;
-      size+=1;
+      else{
+	  throw new IndexOutOfBoundsException();
+      }
       /*int relativeIndex=0;
       String nextEl=data[index+relativeIndex];
       String nextNextEl="";
