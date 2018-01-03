@@ -32,32 +32,29 @@ public class OrderedSuperArray extends SuperArray{
       return 0;
     }
     public int findIndexBinary(String element){
-     if (size()<3){
-       return findIndex(element);
-       }
     int start=0;
     int end=size()-1;
     int middle=(end-start)/2;
-    while(middle-1!=start||middle+1!=end){
-      if(get(middle).compareTo(element)>0){
+    while(middle!=start&&middle!=end){
+      if(element.compareTo(get(middle))<0){
           end=middle;
           middle=(end-start)/2+start;
         }
-        else {
+      if (element.compareTo(get(middle))>0){
           start=middle;
           middle=(end-start)/2+start;
+
         }
+      if(element.equals(get(middle))){
+        return middle+1;
+      }
     }
-    if(element.compareTo(get(end))>=0){
-          return end+1;
-       }
-
-    if(element.compareTo(get(start))<=0){
-        return start;
-    }
-    return middle;
-
-
+    for(int i=end;i>=start;i--){
+        if(element.compareTo(get(i))>0){
+          return i+1;
+        }
+      }
+      return start;
   }
   public int lastIndexOf(String element){
      if (size()<3){
@@ -129,8 +126,7 @@ public class OrderedSuperArray extends SuperArray{
     return middle;
     }
     else{
-        return -1;
-    }
+        return -1;    }
  }
 
 

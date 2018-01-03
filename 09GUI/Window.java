@@ -2,22 +2,30 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-public class Window2 extends JFrame implements ActionListener {
-    private Container pane;
-    private JCheckBox CtoF;
-    private JCheckBox FtoC;
-    private JButton convert;
-    private JTextField t;
+public class Window extends JFrame implements ActionListener {
+  private Container pane;
+  private JCheckBox CtoF;
+  private JCheckBox FtoC;
+  private JButton convert;
+  private JTextField input;
+  private JTextField result;
+  
  
   //CONSTRUCTOR SETS EVERYTHING UP
   public void actionPerformed(ActionEvent e) { 
       String s =e.getActionCommand();
-      System.out.println(s);
-      //if(CtoF.isSelected()){
-      //	  s+=Temperature.CtoF(Integer.parseInt(t.getText()));
-      //}
-
-      
+      if(s.equals("Convert")){
+        try{
+        if(CtoF.isSelected()){
+          result.setText(Temperature.CtoF(Double.parseDouble(input.getText()))+"");
+        }
+        else if(FtoC.isSelected()){
+          result.setText(Temperature.FtoC(Double.parseDouble(input.getText()))+"");
+        }
+        }catch(NumberFormatException E){
+          input.setText("input a number");
+        }
+      }    
   } 
   public Window() {
      this.setTitle("My first GUI");
@@ -31,12 +39,16 @@ public class Window2 extends JFrame implements ActionListener {
      FtoC = new JCheckBox("Farenheit to Celsius");
      CtoF = new JCheckBox("Celsius to Farenheit");
      convert= new JButton("Convert");
-     t = new JTextField(12);
+     input = new JTextField(12);
+     result = new JTextField(12);
      convert.addActionListener(this);
+     FtoC.addActionListener(this);
+     CtoF.addActionListener(this);
      pane.add(FtoC);
      pane.add(CtoF);
-     pane.add(t);
+     pane.add(input);
      pane.add(convert);
+     pane.add(result);
  }
 
   //MAIN JUST INSTANTIATES + MAKE VISIBLE
